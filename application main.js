@@ -1,7 +1,7 @@
 window.alert("Enter Information Below")
 
 function app(people){
-  let searchType = prompt("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
     searchByName(people);
@@ -26,6 +26,7 @@ function chars(input){
 }
 
 function searchByName(people){
+
   let firstName = prompt("What is the person's first name?", chars);
   let lastName = prompt("What is the person's last name?", chars);
   let newArray = data.filter(function (el) {
@@ -37,9 +38,13 @@ function searchByName(people){
 }
 
 
+
+ 
+
 function searchByTraits(people) {
   let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
-  let filteredPeople ;
+  let filteredPeople;
+
 
   switch(userSearchChoice) {
     case "height":
@@ -65,13 +70,18 @@ function searchByTraits(people) {
       searchByTraits(people);
       break;
   }  
+
 }
+
 
 
 function searchByHeight(people){
 	let userInputHeight = prompt("What is the person height");
 
+
 	let newArray = data.filter(function(el){
+
+
 		if(el.height == userInputHeight){
 			return true;
 		}
@@ -82,20 +92,32 @@ function searchByHeight(people){
   function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
 
+
   let newArray = data.filter(function (el) {
+
+  
+
     if(el.weight == userInputWeight) {
       return true;
     }
     // return true if el.height matches userInputHeight
   });
 
+
   console.log(newArray);
+
+  
+
 }
 
 function searchByEyeColor(people){
 	let userInputEyeColor = prompt("What color is the person's eyes");
 
+
 	let newArray = data.filter(function(el){
+
+	
+
 		if(el.eyeColor == userInputEyeColor){
 			return true;
 		}
@@ -106,7 +128,11 @@ function searchByEyeColor(people){
 function searchByGender(people){
 	let userInputGender = prompt("What is the person's gender");
 
+
 	let newArray = data.filter(function(el){
+
+	
+
 		if(el.gender == userInputGender){
 			return true;
 		}
@@ -117,7 +143,9 @@ function searchByGender(people){
 function searchByAge(people){
 	let userInputAge = prompt("How old is the person");
 
+
 	let newArray = data.filter(function(el){
+
 		if(el.age == userInputAge){
 			return true;
 		}
@@ -128,7 +156,9 @@ function searchByAge(people){
 function searchByOccupation(people){
 	let userInputOccupation = prompt("What is the person's occupation");
 
+
 	let newArray = data.filter(function(el){
+
 		if(el.occupation == userInputOccupation){
 			return true;
 		}
@@ -138,4 +168,6 @@ function searchByOccupation(people){
 
 
 
+
 app();
+

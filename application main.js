@@ -13,7 +13,7 @@ function app(data){
     searchByName(data);
     break;
     case 'no':
-    searchByTraits(people);
+    searchByTraits(data);
     break;
     default:
     alert("Wrong! Please try again, following the instructions dummy. :)");
@@ -40,8 +40,10 @@ function searchByTraits(people) {
       filteredPeople = searchByGender(people);
       break;
     case "age":
-      filteredPeople = s
+      filteredPeople = searchByAge(people);
     // so on and so forth
+    case "occupation":
+      filteredPeople = searchByOccupation(people);
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -85,7 +87,7 @@ function searchByHeight(people){
 }
 
 function searchByEyeColor(people){
-  let userInputEyeColor = promptFor("What color is the person's eyes");
+  let userInputEyeColor = promptFor("What color is the person's eyes", chars);
 
 
   let newArray = data.filter(function(el){
@@ -99,7 +101,7 @@ function searchByEyeColor(people){
   return newArray;
 }
 function searchByGender(people){
-  let userInputGender = promptFor("What is the person's gender");
+  let userInputGender = promptFor("What is the person's gender", genderInput);
 
 
   let newArray = data.filter(function(el){
@@ -119,7 +121,7 @@ function searchByAge(people){
 
 }
 function searchByOccupation(people){
-  let userInputOccupation = promptFor("What is the person's occupation?");
+  let userInputOccupation = promptFor("What is the person's occupation?", chars);
 
 
   let newArray = data.filter(function(el){
@@ -182,10 +184,12 @@ function displayPerson(person){
 
 // function that prompts and validates user input
 function promptFor(question, valid){
-  do{
     var response = prompt(question).trim();
-  } while(!response || !valid(response));
-  return response;
+    if(valid(response)){
+      return response;
+    }
+    return promptFor(question, valid);
+
 }
 
 // helper function to pass into promptFor to validate yes/no answers
@@ -200,18 +204,33 @@ function chars(input){
 }
 
 function heightInput(input){
-  if (input == NaN) {
-    alert("Please enter the height in inches. Example: 67 inches = 5 Feet 7 Inches");
-    return searchByHeight(people);
+  if (isNaN(input) === false) {
+    return true;
   }
+    alert("Please enter the height in inches. Example: 67 inches = 5 Feet 7 Inches");
+    return false;
+
 }
 
 function weightInput(input){
-  if (input == NaN) {
-    alert("Please enter a number.");
-    return searchByWeight(people);
+  if (isNaN(input) == false) {
+    return true;
   }
+
+    alert("Please enter a number.");
+    return false;
+
+  }
+
+function genderInput(input) {
+  if (input == "male" || input == "female") {
+    return true;
+  }
+    alert("Please enter 'male' or 'female'.");
+    return false;
+ 
 }
+
 
 
 

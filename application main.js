@@ -49,10 +49,19 @@ function searchByTraits(people) {
       searchByTraits(people);
       break;
   }  
+  displayPeople(filteredPeople);
+  return filteredPeople;
+}
+//displayPeople(filteredPeople);
 
-  let foundPerson = filteredPeople[0];
 
-  mainMenu(foundPerson, people);
+
+let foundPerson = filteredPeople
+
+
+  //let foundPerson = filteredPeople[0];
+
+  //mainMenu(foundPerson, people);
 
 }
 
@@ -79,7 +88,7 @@ function searchByHeight(people){
   let newArray = data.filter(function(el){
 
 
-    if(el.height == userInputHeight){
+    if((el.height == userInputHeight)){
       return true;
     }
   });
@@ -88,18 +97,43 @@ function searchByHeight(people){
 
 function searchByEyeColor(people){
   let userInputEyeColor = promptFor("What color is the person's eyes", chars);
+  let filteredEyeColor;
+  
+  switch (userInputEyeColor){
+    case "brown":
+  
+    break;
+    case "black":
+    filteredEyeColor = true;
+    break;
+    case "hazel":
+    filteredEyeColor = true;
+    break;
+    case "blue":
+    filteredEyeColor = true;
+    break;
+    case "green":
+    filteredEyeColor = true;
+    break;
+    default:
+    alert("Please enter only brown, black, hazel, blue, or green.");
+    searchByEyeColor(people);
+    break;
+  }
 
 
-  let newArray = data.filter(function(el){
+  //let newArray = data.filter(function(el){
 
   
 
-    if(el.EyeColor == userInputEyeColor){
-      return true;
-    }
-  });
-  return newArray;
+    //if(el.eyeColor == filteredEyeColor){
+      //return true;
+    //}
+  //});
+  return filteredEyeColor;
 }
+
+
 function searchByGender(people){
   let userInputGender = promptFor("What is the person's gender", genderInput);
 
@@ -234,8 +268,6 @@ function genderInput(input) {
 
 
 
-
-
 function searchByName(person) {
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -244,6 +276,8 @@ if (firstName === el.firstName && lastName === el.lastName)
   {return true;}
 
   });
+  displayPeople(newArray);
+
 
     //for(i = 0; i < data.length; i++){
       //if ((data[i].firstName = firstName) && (data[i].lastName = lastName)) {
@@ -257,6 +291,10 @@ if (firstName === el.firstName && lastName === el.lastName)
     //}
   //});
   //return newArray;
+
+  let newArray = searchByName(people);
+   // 
+ 
   let personFound = newArray[0];
   //console.log(personFound);
   mainMenu(personFound, data);
@@ -266,11 +304,41 @@ if (firstName === el.firstName && lastName === el.lastName)
 
 //checkName(data);
 
+
+function confirmPerson(people) {
+  let checkPerson = promptFor("Did you find the person you were looking for? Please enter 'yes' or 'no'.", yesNo).toLowerCase();
+  return checkPerson;
+}
+
+function searchTraitAgain(person){
+  let secondSearch = promptFor("Please enter another trait to search. Enter 'height', 'weight', 'eye color', 'gender', or 'occupation'.");
+  return secondSearch;
+}
+
+function furtherNarrowDownArray(person){
+  let secondTrait = searchTraitAgain(person);
+  let newResults;
+  switch(secondTrait){
+    case "height":
+
+  }
+}
+
+
+
+
+
+
+
 app();
 
 
 
 
+
+
+  // body...
+}
 
  
 //function displayArray (info){

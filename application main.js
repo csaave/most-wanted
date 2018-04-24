@@ -1,11 +1,11 @@
 "use strict"
 window.alert("Enter Information Below")
 
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
 
-// app is the function called to start the entire application
+
+
+
+
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
@@ -17,7 +17,7 @@ function app(people){
     break;
     default:
     alert("Wrong! Please try again, following the instructions dummy. :)");
-    app(people); // restart app
+    app(people); 
     break;
   }
 }
@@ -42,7 +42,7 @@ function searchByTraits(people) {
     case "age":
       filteredPeople = searchByAge(people);
       break;
-    // so on and so forth
+    
     case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
@@ -51,15 +51,7 @@ function searchByTraits(people) {
       searchByTraits(people);
       break;
   }  
-    displayPeople(filteredPeople);
-   
-  
- 
-
-//displayPeople(filteredPeople);
-
-
-//function for validating the filtered array, and if true, go onto the main menu function
+    
 
 
   let foundPerson = filteredPeople[0];
@@ -67,6 +59,7 @@ function searchByTraits(people) {
   mainMenu(foundPerson, people);
 
 }
+
 
 
 function searchByWeight(people) {
@@ -77,7 +70,7 @@ function searchByWeight(people) {
       return true;
 
     }
-    // return true if el.height matches userInputHeight
+    
   });
 
 
@@ -105,19 +98,19 @@ function searchByEyeColor(people){
   
   switch (userInputEyeColor){
     case "brown":
-  
+    filteredEyeColor = "brown";
     break;
     case "black":
-    filteredEyeColor = true;
+    filteredEyeColor = "black";
     break;
     case "hazel":
-    filteredEyeColor = true;
+    filteredEyeColor = "hazel";
     break;
     case "blue":
-    filteredEyeColor = true;
+    filteredEyeColor = "blue";
     break;
     case "green":
-    filteredEyeColor = true;
+    filteredEyeColor = "green";
     break;
     default:
     alert("Please enter only brown, black, hazel, blue, or green.");
@@ -126,15 +119,15 @@ function searchByEyeColor(people){
   }
 
 
-  //let newArray = data.filter(function(el){
+  let eyeColorArray = data.filter(function(el){
 
   
 
-    //if(el.eyeColor == filteredEyeColor){
-      //return true;
-    //}
-  //});
-  return filteredEyeColor;
+    if(el.eyeColor == filteredEyeColor){
+      return true;
+    }
+  });
+  return eyeColorArray;
 }
 
 
@@ -170,14 +163,14 @@ function searchByOccupation(people){
   });
   return occupationArray;
 }
-// Menu function to call once you find who you are looking for
+
 function mainMenu(person, people){
 
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
+  
 
   if(!person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    return app(people); 
   }
 
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
@@ -187,24 +180,28 @@ function mainMenu(person, people){
     displayPerson(person);
     break;
     case "family":
-    // TODO: get person's family
+    displayPeople(person);
+    
     break;
     case "descendants":
-    // TODO: get person's descendants
+    displayPeople(person);
+    
     break;
     case "restart":
-    app(people); // restart
+    app(people); 
     break;
     case "quit":
-    return; // stop execution
+    return; 
     default:
-    return mainMenu(person, people); // ask again
+    return mainMenu(person, people); 
   }
 }
 
+function getDescendants(people){
+
+}
 
 
-// alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
@@ -212,8 +209,7 @@ function displayPeople(people){
 }
 
 function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
+ 
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   let personHeight = "Height: " + person.height + "\n";
@@ -222,7 +218,7 @@ function displayPerson(person){
   let personGender = "Gender: " + person.gender + "\n";
   let personOccupation = "Occupation: " + person.occupation + "\n";
   let personID = "ID: " + person.id + "\n";
-  // TODO: finish getting the rest of the information to display
+  
   alert(personInfo);
   alert(personHeight);
   alert(personWeight);
@@ -232,7 +228,7 @@ function displayPerson(person){
   alert(personID);
 }
 
-// function that prompts and validates user input
+
 function promptFor(question, valid){
     var response = prompt(question).trim();
     if(valid(response)){
@@ -242,15 +238,15 @@ function promptFor(question, valid){
 
 }
 
-// helper function to pass into promptFor to validate yes/no answers
+
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
-// helper function to pass in as default promptFor validation
+
 function chars(input){
   return true; 
-  // default validation only
+ 
 }
 
 function heightInput(input){
@@ -295,21 +291,8 @@ if (firstName === el.firstName && lastName === el.lastName)
   displayPeople(nameArray);
 
 
-    //for(i = 0; i < data.length; i++){
-      //if ((data[i].firstName = firstName) && (data[i].lastName = lastName)) {
-      //return true;}
     
-    
-    
-    //else {
-      //return false;
-      //return app(people);
-    //}
-  //});
-  //return newArray;
 
-  
-   // 
  
   let personFound = nameArray[0];
   //console.log(personFound);
@@ -318,7 +301,7 @@ if (firstName === el.firstName && lastName === el.lastName)
 }
 
 
-//checkName(data);
+
 
 
 
@@ -337,51 +320,3 @@ app();
 
 
 
-
-  // body...
-
-
- 
-//function displayArray (info){
-  //console.log(data);
-//}
-
-
-
-//function verifyResults(displayInformation){
-  //let i = displayInformation();
-  //console.log(i);
-//}
-
-//displayArray();
-
-
-
-
-
-//console.log(data);
-
-
-//function runSearch(name) {
-  
-//
-//app();
-
-
-
-
-
-
-
-/*function checkSomething(input){
-  return data;
-}
-
-function newArray(array) {
-  let people = checkSomething();*/
-  //let person = [];
-  //let combinedArray = people.concat(person);
-  //console.log(combinedArray);
-//}
-
-//newArray();

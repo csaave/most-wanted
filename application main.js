@@ -23,7 +23,7 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
+  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'date of birth',  'occupation'.");
   let filteredPeople;
 
   switch(userSearchChoice) {
@@ -46,12 +46,15 @@ function searchByTraits(people) {
     case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
+    case "date of birth":
+      filteredPeople = searchByDob(people);
+      break;
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
       break;
   }  
-    
+    displayPeople(filteredPeople);
 
 
   let foundPerson = filteredPeople[0];
@@ -197,6 +200,13 @@ function mainMenu(person, people){
   }
 }
 
+function dobInput(input){
+ if(input == false){
+   return true;
+ }
+ alert("please enter date of birth 12/3/4567");
+}
+
 function getDescendants(people){
 
 }
@@ -218,6 +228,7 @@ function displayPerson(person){
   let personGender = "Gender: " + person.gender + "\n";
   let personOccupation = "Occupation: " + person.occupation + "\n";
   let personID = "ID: " + person.id + "\n";
+  let persondescendants = "Descendants: " + person.descendants + "\n";
   
   alert(personInfo);
   alert(personHeight);
@@ -226,6 +237,18 @@ function displayPerson(person){
   alert(personGender);
   alert(personOccupation);
   alert(personID);
+  alert(persondescendants);
+}
+
+function searchByDob(people){
+  let userInputDob = promptFor("What is the person's date of birth?", dobInput);
+  let newArray = data.filter(function(el){
+    if(el.dob == userInputDob){
+      return true;
+    }
+    
+});
+return newArray;
 }
 
 

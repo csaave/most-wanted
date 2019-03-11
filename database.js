@@ -12,7 +12,7 @@ const data = [
 		"occupation": "programmer",
 		"parents": [],
 		"currentSpouse": 401222887,
-		"descendants": 951747547
+		
 
 	},
 	{
@@ -143,7 +143,7 @@ const data = [
 		"weight": 118,
 		"eyeColor": "brown",
 		"occupation": "programmer",
-		"parents": [401222887],
+		"parents": [401222887, 272822514],
 		"currentSpouse": 294874671
 	},
 	{
@@ -156,7 +156,7 @@ const data = [
 		"weight": 179,
 		"eyeColor": "blue",
 		"occupation": "nurse",
-		"parents": [401222887],
+		"parents": [401222887, 272822514],
 		"currentSpouse": 159819275
 	},
 	{

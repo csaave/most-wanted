@@ -106,7 +106,7 @@ function searchByWeight(people) {
   let userInputWeight = promptFor("How much does the person weigh?", weightInput);
   if (people === undefined) {
     let weightArray = data.filter(function (el) {
-    if(el.weight === userInputWeight) {
+    if(el.weight === parseInt(userInputWeight)) {
       return true;
     }
     });
@@ -114,13 +114,14 @@ function searchByWeight(people) {
       return weightArray;
     }
     else if (weightArray.length === 0) {
+      alert("Could not find anyone with that weight from the filtered people. Please try another weight, or search by another trait.");
       return people;
     }
     
   }
   else if (people.length > 0) {
     let weightArray = people.filter(function(el){
-      if (el.weight === userInputWeight) {
+      if (el.weight === parseInt(userInputWeight)) {
         return true;
       }
     });
@@ -128,6 +129,7 @@ function searchByWeight(people) {
       return weightArray;
     }
     else if (weightArray.length === 0) {
+      alert("Could not find anyone with that weight from the filtered people. Please try another weight, or search by another trait.");
       return people;
     }
     
@@ -143,7 +145,7 @@ function searchByHeight(people){
   let userInputHeight = promptFor("How tall is the person?", heightInput);
   if (people === undefined) {
     let heightArray = data.filter(function(el){
-    if((el.height === userInputHeight)){
+    if((el.height === parseInt(userInputHeight))){
       return true;
     }
   });
@@ -151,13 +153,14 @@ function searchByHeight(people){
       return heightArray;
     }
     else if (heightArray.length === 0) {
+      alert("Could not find anyone with that height from the filtered people. Please try another height, or search by another trait.");
       return people;
     }
     
   }
   else if (people.length > 0) {
     let heightArray = people.filter(function(el){
-      if (el.height === userInputHeight) {
+      if (el.height === parseInt(userInputHeight)) {
         return true;
       }
     });
@@ -165,6 +168,7 @@ function searchByHeight(people){
       return heightArray;
     }
     else if (heightArray.length === 0) {
+      alert("Could not find anyone with that height from the filtered people. Please try another height, or search by another trait.");
       return people;
     }
     
@@ -209,6 +213,7 @@ function searchByEyeColor(people){
       return eyeColorArray;
     }
     else if (eyeColorArray === 0) {
+      alert("Could not find anyone with that eye color from the filtered people. Please try another eye color, or search by another trait.");
       return people;
     }
     
@@ -223,6 +228,7 @@ function searchByEyeColor(people){
       return eyeColorArray;
     }
     else if (eyeColorArray.length === 0) {
+      alert("Could not find anyone with that eye color from the filtered people. Please try another eye color, or search by another trait.");
       return people;
     }
     
@@ -244,6 +250,7 @@ function searchByGender(people){
       return genderArray;
     }
     else if (genderArray.length === 0) {
+      alert("Could not find anyone that is that gender from the filtered people. Please try another gender, or search by another trait.");
       return people;
     }
     
@@ -258,6 +265,7 @@ function searchByGender(people){
       return genderArray;
     }
     else if (genderArray.length === 0) {
+      alert("Could not find anyone that is that gender from the filtered people. Please try another gender, or search by another trait.");
       return people;
     }
     
@@ -265,12 +273,61 @@ function searchByGender(people){
   
   
 }
+function displayBirthday(person){
+  var birthday = new Date(person.dob);
+  var currentDate = new Date()
+  var birthYears = (currentDate.getFullYear() - birthday.getFullYear());
+  alert(birthYears);
+}
+
 
 function searchByAge(people){
-  let userInputAge = promptFor("How old is the person?")
+  let userInputAge = promptFor("How old is the person?", ageInput);
+  if (people === undefined) {
+    let ageArray = data.filter(function(el){
+      let birthday = new Date(el.dob);
+      let currentDate = new Date();
+      let birthYear = birthday.getFullYear();
+      let currentYear = currentDate.getFullYear();
+      if ((currentYear - birthYear).toString() === userInputAge) {
+        return true;
+      }
+    });
+    if (ageArray.length > 0) {
+      return ageArray;
+    }
+    else if (ageArray.length === 0) {
+      alert("Could not find anyone with that birthday from the filtered people. Please try another birthday, or search by another trait. Remember to enter a birthday in the format of MM/DD/YYYY");
+      return people;
+    }
+  
+  }
+  else if (people.length > 0) {
+    let ageArray = people.filter(function(el){
+      let birthday = new Date(el.dob);
+      let currentDate = new Date();
+      let birthYear = birthday.getFullYear();
+      let currentYear = currentDate.getFullYear();
+      if ((currentYear - birthYear).toString() === userInputAge) {
+        return true;
+      }
+    });
+    if (ageArray.length > 0) {
+      return ageArray;
+    }
+    else if (ageArray.length === 0) {
+      alert("Could not find anyone with that birthday from the filtered people. Please try another birthday, or search by another trait. Remember to enter a birthday in the format of MM/DD/YYYY");
+      return people;
+    }
+  
+  }
+  }
+  
+  
+  
 
 
-}
+
 function searchByOccupation(people){
   let userInputOccupation = promptFor("What is the person's occupation?", chars);
   if (people === undefined) {
@@ -284,6 +341,7 @@ function searchByOccupation(people){
       return occupationArray;
     }
     else if (occupationArray.length === 0) {
+      alert("Could not find anyone with that occupation from the filtered people. Please try another occupation, or search by another trait.");
       return people;
     }
   }
@@ -297,6 +355,7 @@ function searchByOccupation(people){
       return occupationArray;
     }
     else if (occupationArray.length === 0) {
+      alert("Could not find anyone with that occupation from the filtered people. Please try another occupation, or search by another trait.");
       return people;
     }
   }
@@ -330,6 +389,9 @@ function mainMenu(person, people){
     getDescendants(person, personDescendants, people);
     
     break;
+    case "birthday":
+    displayBirthday(person);
+    break;
     case "restart":
     app(people); 
     break;
@@ -340,11 +402,12 @@ function mainMenu(person, people){
   }
 }
 
-function dobInput(input){
- if(input == false){
+function ageInput(input){
+ if(isNaN(input) === false){
    return true;
  }
- alert("please enter date of birth 12/3/4567");
+ alert("Please enter a number for the age of a person");
+ return false;
 }
 
 
@@ -415,6 +478,7 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";

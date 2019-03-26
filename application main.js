@@ -50,37 +50,32 @@ function searchByTraits(people) {
       filteredPeople = searchByOccupation(people);
       break;
     default:
-      alert("You entered an invalid search type! Please try again.");
+      alert("You entered an invalid search type! Please enter either 'height', 'weight', 'eye color', 'gender', 'age', or 'occupation'.");
       searchByTraits(people);
       break;
   }  
   displayPeople(filteredPeople);
-  let correctPerson = promptFor("Did you find the person you were looking for? Please enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(correctPerson){
+  if (filteredPeople.length > 1) {
+    let correctPerson = promptFor("Did you find the person you were looking for? Please enter 'yes' or 'no'", yesNo).toLowerCase();
+    switch(correctPerson){
     case "yes":
-      let foundPerson = filteredPeople[0];
-      mainMenu(foundPerson, people);
+      searchByName();
       return;
     case "no":
       searchByTraits(filteredPeople);
       break;
-    /*let foundPerson = filteredPeople[0];
   }
   }
+  else if (filteredPeople.length === 1) {
+    let foundPerson = filteredPeople[0];
+    mainMenu(foundPerson, people);
+    return;
   }
-  mainMenu(foundPerson, people);*/
-  }
-  /*let firstNameOfPerson = prompt("What is the first name of the person?");
-  let lastNameOfPerson = prompt("What is the last name of the person?");
-  for (var i = 0; i < filteredPeople.length; i++) {
-    if ((firstNameOfPerson === filteredPeople[i].firstName) && (lastNameOfPerson === filteredPeople[i].lastName)) {
 
-    }
-    else{
-      continue;
-    }
+  else{
+    searchByTraits(people);
   }
-  let foundPerson = searchByPersonInArray(people);*/
+  
 }
 
   function searchByPersonInArray(people){
